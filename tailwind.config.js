@@ -19,6 +19,8 @@ module.exports = {
         faded: '#00000059',
       },
       gray: {
+        line: '#DBDBDB',
+        or: '#9E9E9E',
         base: '#616161',
         background: '#fafafa',
         primary: '#dbdbdb',
