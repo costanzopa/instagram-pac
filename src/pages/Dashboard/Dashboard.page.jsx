@@ -10,7 +10,7 @@ const Dashboard = (props) => {
   return (
     <div className="bg-gray-background">
       <Header />
-      <div className="grid">
+      <div className="grid grid-cols-3 gap-4 justify-between mx-auto mx-w-screen-lg">
         <Timeline />
         <Sidebar />
       </div>
