@@ -75,10 +75,19 @@ export default function Login() {
           </form>
           <div className="flex justify-items-start items-center w-full">
             <div className="border border-gray-line w-1/2 mr-4"></div>
-            <p className="text-sm leading-4 text-gray-or font-semibold py-5">
+            <div className="text-sm leading-4 text-gray-or font-semibold py-5">
               OR
-            </p>
+            </div>
             <div className="border border-gray-line w-1/2 ml-4"></div>
+          </div>
+          <div className="flex justify-center items-center w-full mt-2">
+            <img src="fb-icon.png" alt="" className="h-4 mr-3" />
+            <div className="text-sm text-blue-facebook font-semibold cursor-pointer">
+              Login with Facebook
+            </div>
+          </div>
+          <div className="flex justify-center items-center w-full text-xs mt-3 text-blue-facebook cursor-pointer">
+            Forgot password?
           </div>
         </div>
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
