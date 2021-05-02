@@ -22,5 +22,5 @@ export async function getUserByUserId(userId) {
     docId: item.id,
   }));
 
-  return user;
+  return user[0];
 }

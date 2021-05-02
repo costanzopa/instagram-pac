@@ -4,11 +4,12 @@ import User from '../User';
 import Suggestions from '../Suggestions';
 
 const Sidebar = (props) => {
-  const { user: fullName, username, userId } = useUser();
+  const user = useUser();
+
   return (
-    <div p-4>
-      <User />
-      <Suggestions />
+    <div className="p-4">
+      <User username={user.username} fullName={user.fullName} />
+      <Suggestions userId={user.userId} />
     </div>
   );
 };
