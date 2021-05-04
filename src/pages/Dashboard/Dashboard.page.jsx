@@ -1,20 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import Timeline from '../../components/Timeline';
 import Sidebar from '../../components/Sidebar';
+import useUser from '../../hooks/use-user';
+import LoggedInUserContext from '../../context/logged-in-user';
+import UserContext from '../../context/user';
 
-const Dashboard = (props) => {
+const Dashboard = () => {
+  const { user: loggedInUser } = useContext(UserContext);
+  const { user, setActiveUser } = useUser(loggedInUser.uid);
   useEffect(() => {
     document.title = 'Instagram';
   }, []);
   return (
-    <div className="bg-gray-background">
-      <Header />
-      <div className="grid grid-cols-3 gap-4 justify-between mx-auto mx-w-screen-lg">
-        <Timeline />
-        <Sidebar />
+    <LoggedInUserContext.Provider value={{ user, setActiveUser }}>
+      <div className="bg-gray-background">
+        <Header />
+        <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
+          <Timeline />
+          <Sidebar />
+        </div>
       </div>
-    </div>
+    </LoggedInUserContext.Provider>
   );
 };
 export default Dashboard;
+
+Dashboard.propTypes = {
+  user: PropTypes.object.isRequired,
+};
