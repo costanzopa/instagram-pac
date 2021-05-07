@@ -6,8 +6,10 @@ import useAuthListener from './hooks/user-auth-listener';
 import './styles/app.css';
 
 import ProtectedRoute from './components/ProtectedRoute';
+import UnLoggedRoute from './components/UnLoggedRoute';
 const LoginPage = lazy(() => import('./pages/Login'));
 const SignUpPage = lazy(() => import('./pages/SignUp'));
+const ProfilePage = lazy(() => import('./pages/Profile'));
 const DashboardPage = lazy(() => import('./pages/Dashboard'));
 const NotFoundPage = lazy(() => import('./pages/NotFound'));
 
@@ -18,8 +20,13 @@ const App = () => {
       <Router>
         <Suspense fallback={<p>Loading ...</p>}>
           <Switch>
-            <Route path={ROUTES.LOGIN} component={LoginPage} />
-            <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+            <UnLoggedRoute user={user} path={ROUTES.LOGIN}>
+              <LoginPage />
+            </UnLoggedRoute>
+            <UnLoggedRoute user={user} path={ROUTES.SIGN_UP}>
+              <SignUpPage />
+            </UnLoggedRoute>
+            <Route path={ROUTES.PROFILE} component={ProfilePage} />
             <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
               <DashboardPage />
             </ProtectedRoute>
