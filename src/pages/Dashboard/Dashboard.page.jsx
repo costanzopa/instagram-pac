@@ -1,14 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import Timeline from '../../components/Timeline';
 import Sidebar from '../../components/Sidebar';
 import useUser from '../../hooks/use-user';
 import LoggedInUserContext from '../../context/logged-in-user';
-import UserContext from '../../context/user';
 
-const Dashboard = () => {
-  const { user: loggedInUser } = useContext(UserContext);
+const Dashboard = ({ user: loggedInUser }) => {
   const { user, setActiveUser } = useUser(loggedInUser.uid);
   useEffect(() => {
     document.title = 'Instagram';
