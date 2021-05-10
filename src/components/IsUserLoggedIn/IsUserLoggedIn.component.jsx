@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
 
-const UnLoggedRoute = ({ user, children, ...rest }) => {
+const IsUserLoggedIn = ({ user, loggedInPath, children, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -16,7 +15,7 @@ const UnLoggedRoute = ({ user, children, ...rest }) => {
           return (
             <Redirect
               to={{
-                pathname: ROUTES.DASHBOARD,
+                pathname: loggedInPath,
                 state: { from: location },
               }}
             />
@@ -28,9 +27,10 @@ const UnLoggedRoute = ({ user, children, ...rest }) => {
     />
   );
 };
-export default UnLoggedRoute;
 
-UnLoggedRoute.propTypes = {
+IsUserLoggedIn.propTypes = {
   user: PropTypes.object,
   children: PropTypes.object.isRequired,
 };
+
+export default IsUserLoggedIn;
