@@ -5,6 +5,7 @@ import * as ROUTES from '../../constants/routes';
 import Header from '../../components/Header';
 import useUser from '../../hooks/use-user';
 import LoggedInUserContext from '../../context/logged-in-user';
+import UserProfile from '../../components/Profile';
 
 const Profile = ({ user: loggedInUser }) => {
   const { username } = useParams();
@@ -28,15 +29,17 @@ const Profile = ({ user: loggedInUser }) => {
     checkUserExists();
   }, [username, history]);
 
-  return userExists && currentProfileUser ? (
+  return (
     <LoggedInUserContext.Provider value={{ user, setActiveUser }}>
       <div className="bg-gray-background">
         <Header />
-        <div className="mx-auto max-w-screen-lg">
-          {currentProfileUser.fullName}
-        </div>
+        {userExists && currentProfileUser ? (
+          <div className="mx-auto max-w-screen-lg">
+            <UserProfile user={currentProfileUser} />
+          </div>
+        ) : null}
       </div>
     </LoggedInUserContext.Provider>
-  ) : null;
+  );
 };
 export default Profile;
