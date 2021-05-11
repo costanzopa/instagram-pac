@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import Header from './ProfileHeader';
+import Photos from './ProfilePhotos';
 import { getUserPhotosByUserId } from '../../services/firebase';
 
 const Profile = ({ user }) => {
@@ -25,7 +26,7 @@ const Profile = ({ user }) => {
       });
     }
     getProfileInfoAndPhotos();
-  }, [user.username]);
+  }, [user]);
 
   return (
     <>
@@ -35,6 +36,7 @@ const Profile = ({ user }) => {
         followerCount={followerCount}
         setFollowerCount={dispatch}
       />
+      <Photos photos={photosCollection} />
     </>
   );
 };
