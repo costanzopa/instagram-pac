@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
+import UserContext from '../../../context/user';
+import useUser from '../../../hooks/use-user';
 import { DEFAULT_IMAGE_PATH } from '../../../constants/paths';
 
 const ProfileHeader = ({
@@ -16,7 +18,11 @@ const ProfileHeader = ({
     username: profileUsername,
   },
 }) => {
-  const [isFollowingProfile, setIsFollowingProfile] = useState(false);
+  const { user: loggedInUser } = useContext(UserContext);
+  const { user } = useUser(loggedInUser?.uid);
+  const [isFollowingProfile, setIsFollowingProfile] = useState(null);
+  const activeBtnFollow = user?.username && user?.username !== profileUsername;
+
   return (
     <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
       <div className="container flex justify-center items-center">
@@ -65,4 +71,19 @@ const ProfileHeader = ({
     </div>
   );
 };
+
+ProfileHeader.propTypes = {
+  photosCount: PropTypes.number.isRequired,
+  followerCount: PropTypes.number.isRequired,
+  setFollowerCount: PropTypes.func.isRequired,
+  profile: PropTypes.shape({
+    docId: PropTypes.string,
+    userId: PropTypes.string,
+    fullName: PropTypes.string,
+    username: PropTypes.string,
+    followers: PropTypes.array,
+    following: PropTypes.array,
+  }).isRequired,
+};
+
 export default ProfileHeader;
