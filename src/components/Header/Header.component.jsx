@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import UserContext from '../../context/user';
 import FirebaseContext from '../../context/firebase';
@@ -6,9 +6,18 @@ import FirebaseContext from '../../context/firebase';
 import * as ROUTES from '../../constants/routes';
 
 const Header = (props) => {
+  const [opacity, setOpacity] = useState(false);
   const { user: loggedInUser } = useContext(UserContext);
   const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
+
+  const mouseDown = () => {
+    setOpacity(() => true);
+  };
+
+  const mouseUp = () => {
+    setOpacity(() => false);
+  };
 
   return (
     <header className="h-16 bg-white border-b border-gray-primary mb-8">
@@ -20,7 +29,10 @@ const Header = (props) => {
                 <img
                   src="/images/logo.png"
                   alt="Instagram"
-                  className="mt-2 w-6/12"
+                  className={`mt-2 w-6/12
+                    ${opacity ? 'opacity-25' : ''}`}
+                  onMouseDown={mouseDown}
+                  onMouseUp={mouseUp}
                 />
               </Link>
             </h1>
