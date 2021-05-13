@@ -3,7 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: 'AIzaSyALAy7bFZeAnqn08ER_jwWDels0ZDw3uDs',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'instagram-pac.firebaseapp.com',
   projectId: 'instagram-pac',
   storageBucket: 'instagram-pac.appspot.com',
