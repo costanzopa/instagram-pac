@@ -7,6 +7,7 @@ import './styles/app.css';
 
 import ProtectedRoute from './components/ProtectedRoute';
 import IsUserLoggedIn from './components/IsUserLoggedIn';
+import Loader from './components/Loader';
 const LoginPage = lazy(() => import('./pages/Login'));
 const SignUpPage = lazy(() => import('./pages/SignUp'));
 const ProfilePage = lazy(() => import('./pages/Profile'));
@@ -18,7 +19,7 @@ const App = () => {
   return (
     <UserContext.Provider value={{ user }}>
       <Router>
-        <Suspense fallback={<p>Loading ...</p>}>
+        <Suspense fallback={<Loader />}>
           <Switch>
             <IsUserLoggedIn
               user={user}
